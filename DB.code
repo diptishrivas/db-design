@@ -1,0 +1,112 @@
+users [icon: user, color: blue] {
+  user_id string pk
+  name string
+  email string
+  password string
+  role string
+  created_at date
+   
+}
+
+trainers [icon: activity, color: orange] {
+  trainer_id string pk
+  user_id string fk
+  bio string
+  experience number
+  specialization string
+}
+
+clients [icon: users, color: green] {
+  client_id string pk
+  user_id string fk
+  age number
+  gender string
+  height number
+  weight number
+  fitness_goal string
+}
+
+plans [icon: clipboard, color: purple] {
+  plan_id string pk
+  trainer_id string fk
+  title string
+  description string
+  price number
+  duration number
+  plan_type string
+}
+
+subscriptions [icon: repeat, color: yellow] {
+  subscription_id string pk
+  client_id string fk
+  plan_id string fk
+  start_date date
+  end_date date
+  status string
+}
+
+sessions [icon: video, color: red] {
+  session_id string pk
+  trainer_id string fk
+  client_id string fk
+  session_date date
+  session_time string
+  type string
+  meeting_link string
+  status string
+}
+checkins [icon: check-circle, color: teal] {
+  checkin_id string pk
+  client_id string fk
+  date date
+  weight number
+  notes string
+}
+
+progress [icon: trending-up, color: pink] {
+  progress_id string pk
+  client_id string fk
+  date date
+  weight number
+  chest number
+  waist number
+  hips number
+  body_fat number
+}
+trainer_notes [icon: file-text, color: gray] {
+  note_id string pk
+  trainer_id string fk
+  client_id string fk
+  note string
+  created_at date
+}
+payments [icon: credit-card, color: brown] {
+  payment_id string pk
+  subscription_id string fk
+  amount number
+  payment_date date
+  payment_status string
+  payment_method string
+}
+
+users.user_id > trainers.user_id
+users.user_id > clients.user_id
+
+trainers.trainer_id > plans.trainer_id
+
+clients.client_id > subscriptions.client_id
+
+plans.plan_id > subscriptions.plan_id
+
+trainers.trainer_id > sessions.trainer_id
+clients.client_id > sessions.client_id
+
+clients.client_id >  checkins.client_id
+clients.client_id > progress.client_id
+
+trainers.trainer_id > trainer_notes.trainer_id
+clients.client_id > trainer_notes.client_id
+
+subscriptions.subscription_id > payments.subscription_id
+
+ 
