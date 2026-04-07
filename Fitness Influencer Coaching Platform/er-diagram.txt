@@ -1,3 +1,5 @@
+/////user,trainer,client,plans,subscription,sessions,checkins,progress,trainer_notes,payments/////
+
 users [icon: user, color: blue] {
   user_id string pk
   name string
